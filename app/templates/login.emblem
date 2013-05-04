@@ -1,0 +1,11 @@
+.row
+  form.login
+    fieldset
+      label Nickname
+      Ember.TextField valueBinding="nick" class="text input"
+      label Host
+      Ember.TextField valueBinding="host" class="text input"
+      label Password
+      Ember.TextField valueBinding="password" class="text input"
+      br
+      input.btn{action "login"} type="submit" value="Login"

@@ -1,0 +1,17 @@
+.row
+  .span4.list
+    form.input-append
+      Ember.TextField valueBinding="entry" class="text input"
+      input.btn{action "add"} type="submit" value="Add"
+    ul.contexts
+      each context in contexts
+        li{action "show" context on="click"} = context
+  .span8.chat
+    ul.log
+      each controller
+        li
+          span class={ me:me :from } = from 
+          span.message = message
+    form.message.input-append
+      Ember.TextField valueBinding="message" class="text input"
+      input.btn{action "sendMessage"} type="submit" value="Send"

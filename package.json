@@ -1,0 +1,38 @@
+{
+  "author": "Michael Lawson",
+  "name": "codertalk",
+  "description": "Package description",
+  "version": "0.0.1",
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "start": "brunch watch --server",
+    "test": "./bin/test"
+  },
+  "dependencies": {
+    "javascript-brunch": ">= 1.0 < 1.6",
+    "coffee-script-brunch": ">= 1.0 < 1.6",
+    "coffeelint-brunch": "> 1.0 < 1.5",
+    "css-brunch": ">= 1.0 < 1.6",
+    "stylus-brunch": ">= 1.0 < 1.6",
+    "uglify-js-brunch": ">= 1.0 < 1.6",
+    "clean-css-brunch": ">= 1.0 < 1.6",
+    "auto-reload-brunch": "> 1.0 < 1.5",
+    "emblem-brunch": "~0.1.1",
+
+    "irc": "0.3.x",
+    "coffee-script": "1.6.x",
+    "express":"3.0.x",
+    "socket.io":"0.9.x"
+  },
+  "devDependencies": {
+    "chai": "1.2.0",
+    "sinon": "1.4.2",
+    "sinon-chai": "2.1.2",
+    "ws": "0.4.21",
+    "mocha-phantomjs": "~2.0.0"
+  }
+}
