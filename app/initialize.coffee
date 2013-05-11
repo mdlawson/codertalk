@@ -4,6 +4,8 @@ App.user = Ember.Object.create()
 
 # Templates
 
+require 'helpers'
+
 require 'templates/application'
 require 'templates/index'
 require 'templates/login'
@@ -31,8 +33,14 @@ App.ChatController = Ember.ArrayController.extend
   init: ->
     @_super()
     receive = (data) => @receiveMessage data
-    App.socket.on "sent", receive
     App.socket.on "message", receive
+    App.socket.on "log", (context,messages) =>
+      messages = JSON.parse messages
+      me = App.user.get "nick"
+      for message in messages
+        message.me = message.from is me 
+      @store[context] = messages.concat @store[context]
+      @notifyPropertyChange "store"
   sendMessage: ->
     App.socket.emit "message",
       to: @get "context"
@@ -55,9 +63,10 @@ App.ChatController = Ember.ArrayController.extend
     @set "context",context
   add: ->
     input = @get "entry"
-    channels = (item for item in input.split(" ") when item[0] is "#")
-    if channels.length
-      App.socket.emit "join", channels.join(" ")
+    #channels = (item for item in input.split(" ") when item[0] is "#")
+    #if channels.length
+    #  App.socket.emit "join", channels.join(" ")
+    App.socket.emit "join", input
     for context in input.split(" ")
       @store[context] or @store[context] = []
     @notifyPropertyChange "store"

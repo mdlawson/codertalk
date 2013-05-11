@@ -5,13 +5,16 @@ exports.startServer = (port,root,callback) ->
   path = require "path"
   express = require "express"
   app = express()
+  RedisStore = require('connect-redis')(express)
   server = require("http").createServer app
   io = require("socket.io").listen server
+  redis = require("redis").createClient()
 
   secret = "SuperSecret"
   key = "connect.sid"
   cookieParser = express.cookieParser secret
-  store = new express.session.MemoryStore()
+  #store = new express.session.MemoryStore()
+  store = new RedisStore client: redis
 
   io.configure "development", ->
     io.set "transports",["websocket"]
@@ -36,6 +39,10 @@ exports.startServer = (port,root,callback) ->
 
 #  app.get "/", (req,res) ->
 #    res.render "index"
+  app.get "/logout", (req,res) ->
+    req.session.destroy ->
+      res.redirect "/"
+
   index = path.join root,"index.html"
   app.get "*", (req,res) ->
     res.sendfile index

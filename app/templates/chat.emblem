@@ -11,7 +11,7 @@
       each controller
         li
           span class={ me:me :from } = from 
-          span.message = message
+          span.message == markdown message
     form.message.input-append
       Ember.TextField valueBinding="message" class="text input"
       input.btn{action "sendMessage"} type="submit" value="Send"

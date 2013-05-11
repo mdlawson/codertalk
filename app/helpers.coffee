@@ -1,0 +1,1 @@
+Ember.Handlebars.registerBoundHelper "markdown", (data) -> return new Handlebars.SafeString marked data
